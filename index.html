@@ -60,12 +60,24 @@
             margin-bottom: 10px;
         }
 
-        .description {
-            text-align: center;
-            font-size: 16px;
-            max-width: 400px;
-            color: #f4f4f4;
-        }
+        .title {
+    text-align: center;
+    font-size: 42px; /* Tamanho grande para destaque */
+    color: #f1eded; /* Cor neutra e elegante */
+    margin: 50px 0; /* Espaçamento em cima e embaixo */
+    letter-spacing: 5px; /* Espaçamento entre letras */
+    font-weight: bold; /* Negrito para impacto */
+    text-transform: uppercase; /* Maiúsculas */
+    line-height: 1.2; /* Espaçamento entre as linhas */
+    text-shadow: 2px 2px 5px rgba(3, 3, 3, 0.15); /* Sombra suave */
+    transition: color 0.4s ease, transform 0.4s ease; /* Transição suave */
+}
+
+.title:hover {
+    color: #e74c3c; /* Muda a cor para vermelho no hover */
+    transform: scale(1.05); /* Efeito de crescimento no hover */
+    text-shadow: 4px 4px 8px rgba(5, 5, 5, 0.3); /* Aumenta a sombra no hover */
+}
 
         .search-container {
             flex: 1;
@@ -144,7 +156,7 @@
 
         #listaProdutos a {
             text-decoration: none;
-            color: #333;
+            color: #f5f2f2;
             display: flex;
             align-items: center;
         }
@@ -187,9 +199,7 @@
         <!-- Container da imagem -->
         <div class="image-container">
             <img src="../imagem/Logo.png" alt="Grande Imagem">
-            <div class="description">
-                <p>Descrição da imagem ou produto destacado.</p>
-            </div>
+            <div class="title">Departamento De Inteligência Operacional</div>
         </div>
 
         <!-- Container da pesquisa -->
@@ -210,9 +220,9 @@
                     </a>
                 </li>
                 <li class="formulario">
-                    <a href="#">
-                        <img src="https://i.imgur.com/QgIclE2.png" alt="Produto">
-                        <span class="item-name">Produto 2</span>
+                    <a href="produtos/produto1.html">
+                        <img src="./imagem/Logo.png" alt="Produto">
+                        <span class="item-name">Registrar Apreensões</span>
                     </a>
                 </li>
             </ul>
