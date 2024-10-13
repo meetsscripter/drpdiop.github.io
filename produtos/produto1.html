@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Relatório</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+        }
+
+        a:hover {
+            background-color: #0056b3;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            overflow-y: auto;
+            max-height: 80vh;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"], input[type="number"], select, input[type="file"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .success-message {
+            text-align: center;
+            color: green;
+            font-weight: bold;
+        }
+
+        .error-message {
+            text-align: center;
+            color: red;
+            font-weight: bold;
+        }
+
+        .material-quantity {
+            display: none;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Formulário de Relatório</h2>
+        
+        <!-- Botão Voltar -->
+        <a href="../index.html" class="back-button">Voltar para a página inicial</a>
+        
+        <!-- Formulário de Login -->
+        <div id="loginForm">
+            <label for="login">Login</label>
+            <input type="text" id="login" required>
+            <button id="loginButton">Entrar</button>
+            <p class="error-message" id="loginErrorMessage" style="display:none;">Login inválido.</p>
+        </div>
+        <!-- Formulário de Relatório -->
+        <form id="reportForm" style="display:none;">
+            <label for="qra">QRA integrantes</label>
+            <input type="text" id="qra" name="qra" required>
+
+            <label for="rg">RG do detido</label>
+            <input type="text" id="rg" name="rg" required>
+
+            <label for="detidoName">Nome do detido</label>
+            <input type="text" id="detidoName" name="detidoName" required>
+
+            <label for="localizacao">Localização</label>
+            <select id="localizacao" name="localizacao" required>
+                <option value="">Selecione a localização</option>
+                <option value="Los Santos">Los Santos</option>
+                <option value="San Fierro">San Fierro</option>
+                <option value="Las Venturas">Las Venturas</option>
+                <option value="Bone County">Bone County</option>
+                <option value="Red County">Red County</option>
+                <option value="Flinty County">Flinty County</option>
+                <option value="Whetstone County">Whetstone County</option>
+            </select>
+
+            <!-- Campo de Referências que só aparecerá após selecionar a localização -->
+            <label for="referencia" id="referenciaLabel" style="display:none;">Referência</label>
+            <select id="referencia" name="referencia" style="display:none;" required>
+                <!-- As opções serão carregadas dinamicamente -->
+            </select>
+
+            <label for="materiais">Materiais apreendidos</label>
+            <div id="materiais">
+                <label>
+                    <input type="checkbox" name="item" value="Produto Quimico" class="material-checkbox">
+                    Produto Químico
+                </label>
+                <input type="number" class="material-quantity" id="produto_quimico" name="produtoQuimicoQtd" placeholder="Quantidade">
+
+                <label>
+                    <input type="checkbox" name="item" value="Adubo" class="material-checkbox">
+                    Adubo
+                </label>
+                <input type="number" class="material-quantity" id="adubo" name="aduboQtd" placeholder="Quantidade">
+            
+                <label>
+                    <input type="checkbox" name="item" value="Cannabis" class="material-checkbox">
+                    Cannabis
+                </label>
+                <input type="number" class="material-quantity" id="cannabis" name="cannabisQtd" placeholder="Quantidade">
+            
+                <label>
+                    <input type="checkbox" name="item" value="Folha de coca" class="material-checkbox">
+                    Folha de coca
+                </label>
+                <input type="number" class="material-quantity" id="folha_de_coca" name="folhaCocaQtd" placeholder="Quantidade">
+            
+                <label>
+                    <input type="checkbox" name="item" value="Kevlar" class="material-checkbox">
+                    Kevlar
+                </label>
+                <input type="number" class="material-quantity" id="kevlar" name="kevlarQtd" placeholder="Quantidade">
+            
+                <label>
+                    <input type="checkbox" name="item" value="5.56" class="material-checkbox">
+                    5.56
+                </label>
+                <input type="number" class="material-quantity" id="5.56" name="cincoCincoSeisQtd" placeholder="Quantidade">
+            
+                <label>
+                    <input type="checkbox" name="item" value="7.62" class="material-checkbox">
+                    7.62
+                </label>
+                <input type="number" class="material-quantity" id="7.62" name="seteSeisDoisQtd" placeholder="Quantidade">
+            
+                <label>
+                    <input type="checkbox" name="item" value="9mm" class="material-checkbox">
+                    9mm
+                </label>
+                <input type="number" class="material-quantity" id="9mm" name="noveMilimetrosQtd" placeholder="Quantidade">
+            
+                <label>
+                    <input type="checkbox" name="item" value="12" class="material-checkbox">
+                    12
+                </label>
+                <input type="number" class="material-quantity" id="12" name="dozeQtd" placeholder="Quantidade">
+            
+                <label>
+                    <input type="checkbox" name="item" value=".45" class="material-checkbox">
+                    .45
+                </label>
+                <input type="number" class="material-quantity" id=".45" name="quarentaCincoQtd" placeholder="Quantidade">
+            
+                <label>
+                    <input type="checkbox" name="item" value="Algemas" class="material-checkbox">
+                    Algemas
+                </label>
+                <input type="number" class="material-quantity" id="algemas" name="algemasQtd" placeholder="Quantidade">
+            
+                <label>
+                    <input type="checkbox" name="item" value="Lixadeira" class="material-checkbox">
+                    Lixadeira
+                </label>
+                <input type="number" class="material-quantity" id="lixadeira" name="lixadeiraQtd" placeholder="Quantidade">
+            
+                <label>
+                    <input type="checkbox" name="item" value="Dinheiro Sujo" class="material-checkbox">
+                    Dinheiro sujo
+                </label>
+                <input type="number" class="material-quantity" id="dinheiro_sujo" name="sujoQtd" placeholder="Quantidade">
+            
+                <label>
+                    <input type="checkbox" name="item" value="radio" class="material-checkbox">
+                    Rádio
+                </label>
+                <input type="number" class="material-quantity" id="radio" name="radioQtd" placeholder="Quantidade">
+            
+                <label>
+                    <input type="checkbox" name="item" value="Colete" class="material-checkbox">
+                    Colete
+                </label>
+                <input type="number" class="material-quantity" id="colete" name="coleteQtd" placeholder="Quantidade">
+            
+                <label>
+                    <input type="checkbox" name="item" value="Bilhete de Corrida" class="material-checkbox">
+                    Bilhete de corrida
+                </label>
+                <input type="number" class="material-quantity" id="bilhete_de_corrida" name="bilheteCorridaQtd" placeholder="Quantidade">
+            
+                <label>
+                    <input type="checkbox" name="item" value="Pendrive com informações sigilosas" class="material-checkbox">
+                    Pendrive com informações sigilosas
+                </label>
+                <input type="number" class="material-quantity" id="pendrive_com_informações_sigilosas" name="pendriveInformacoesQtd" placeholder="Quantidade">
+            
+                <label>
+                    <input type="checkbox" name="item" value="Token de joalheria" class="material-checkbox">
+                    Token de Joalheria
+                </label>
+                <input type="number" class="material-quantity" id="token_de_joalheria" name="tokenJoalheriaQtd" placeholder="Quantidade">
+                <label>
+                    <input type="checkbox" name="item" value="Token de lojinha" class="material-checkbox">
+                    Token de Lojinha
+                </label>
+                <input type="number" class="material-quantity" id="token_de_lojinha" name="tokenJoalheriaQtd" placeholder="Quantidade">
+            
+                <label>
+                    <input type="checkbox" name="item" value="Cocaina" class="material-checkbox">
+                    Cocaína
+                </label>
+                <input type="number" class="material-quantity" id="cocaina" name="cocainaQtd" placeholder="Quantidade">
+
+                <label>
+                    <input type="checkbox" name="item" value="Peca de arma" class="material-checkbox">
+                    Peça de arma
+                </label>
+                <input type="number" class="material-quantity" id="peca_de_arma" name="pecaArmaQtd" placeholder="Quantidade">
+            
+                <label>
+                    <input type="checkbox" name="item" value="Maconha" class="material-checkbox">
+                    Maconha
+                </label>
+                <input type="number" class="material-quantity" id="maconha" name="maconhaQtd" placeholder="Quantidade">
+            
+                <label>
+                    <input type="checkbox" name="item" value="Laser" class="material-checkbox">
+                    Laser
+                </label>
+                <input type="number" class="material-quantity" id="laser" name="laserQtd" placeholder="Quantidade">
+            
+                <label>
+                    <input type="checkbox" name="item" value="C4" class="material-checkbox">
+                    C4
+                </label>
+                <input type="number" class="material-quantity" id="c4" name="c4Qtd" placeholder="Quantidade">
+            
+                <label>
+                    <input type="checkbox" name="item" value="Dinamite" class="material-checkbox">
+                    Dinamite
+                </label>
+                <input type="number" class="material-quantity" id="dinamite" name="dinamiteQtd" placeholder="Quantidade">
+            
+                <label>
+                    <input type="checkbox" name="item" value="Faca" class="material-checkbox">
+                    Faca
+                </label>
+                <input type="number" class="material-quantity" id="faca" name="facaQtd" placeholder="Quantidade">
+            
+                <label>
+                    <input type="checkbox" name="item" value="Pecas de carro" class="material-checkbox">
+                    Peças de carro
+                </label>
+                <input type="number" class="material-quantity" id="pecas_de_carro" name="pecasCarroQtd" placeholder="Quantidade">
+            
+                <label>
+                    <input type="checkbox" name="item" value="357 Magnum" class="material-checkbox">
+                    357 Magnum
+                </label>
+                <input type="number" class="material-quantity" id="357_magnum" name="357_magnumQtd" placeholder="Quantidade">
+            
+                <label>
+                    <input type="checkbox" name="item" value="Pneu blindado" class="material-checkbox">
+                    Pneu Blindado
+                </label>
+                <input type="number" class="material-quantity" id="pneu_blindado" name="PneublindadoQtd" placeholder="Quantidade">
+
+                <label>
+                    <input type="checkbox" name="item" value="USP" class="material-checkbox">
+                    USP
+                </label>
+                <input type="number" class="material-quantity" id="usp" name="uspQtd" placeholder="Quantidade">
+                <label>
+                    <input type="checkbox" name="item" value="Revolver" class="material-checkbox">
+                    Revolver
+                </label>
+                <input type="number" class="material-quantity" id="revolver" name="revolverQtd" placeholder="Quantidade">
+                <label>
+                    <input type="checkbox" name="item" value="Sig sauer" class="material-checkbox">
+                    Sig Sauer
+                </label>
+                <input type="number" class="material-quantity" id="sig_sauer" name="sigsauerQtd" placeholder="Quantidade">
+                <label>
+                    <input type="checkbox" name="item" value="Glock" class="material-checkbox">
+                    Glock
+                </label>
+                <input type="number" class="material-quantity" id="glock" name="glockQtd" placeholder="Quantidade">
+                <label>
+                    <input type="checkbox" name="item" value="Five seven" class="material-checkbox">
+                    Five Seven
+                </label>
+                <input type="number" class="material-quantity" id="five_seven" name="fivesevenQtd" placeholder="Quantidade">
+                <label>
+                    <input type="checkbox" name="item" value="Desert eagle" class="material-checkbox">
+                    Desert Eagle
+                </label>
+                <input type="number" class="material-quantity" id="desert_eagle" name="deserteagleQtd" placeholder="Quantidade">
+                <label>
+                    <input type="checkbox" name="item" value="Uzi" class="material-checkbox">
+                    Uzi
+                </label>
+                <input type="number" class="material-quantity" id="uzi" name="uziQtd" placeholder="Quantidade">
+                <label>
+                    <input type="checkbox" name="item" value="Double tec9" class="material-checkbox">
+                    Double Tec-9
+                </label>
+                <input type="number" class="material-quantity" id="double_tec9" name="doubletec9Qtd" placeholder="Quantidade">
+                <label>
+                    <input type="checkbox" name="item" value="G36C" class="material-checkbox">
+                    G36C
+                </label>
+                <input type="number" class="material-quantity" id="g36c" name="g36cQtd" placeholder="Quantidade">
+                <label>
+                    <input type="checkbox" name="item" value="IMBEL" class="material-checkbox">
+                    IMBEL IA2
+                </label>
+                <input type="number" class="material-quantity" id="imbel" name="imbelQtd" placeholder="Quantidade">
+                <label>
+                    <input type="checkbox" name="item" value="Ak47" class="material-checkbox">
+                    AK-47
+                </label>
+                <input type="number" class="material-quantity" id="ak47" name="ak47Qtd" placeholder="Quantidade">
+                <label>
+                    <input type="checkbox" name="item" value="Mossberg" class="material-checkbox">
+                    Mossberg
+                </label>
+                <input type="number" class="material-quantity" id="mossberg" name="mossbergQtd" placeholder="Quantidade">
+                <label>
+                    <input type="checkbox" name="item" value="AA12" class="material-checkbox">
+                    AA12
+                </label>
+                <input type="number" class="material-quantity" id="aa12" name="aa12Qtd" placeholder="Quantidade">
+                <label>
+                    <input type="checkbox" name="item" value="Ar15" class="material-checkbox">
+                    AR15
+                </label>
+                <input type="number" class="material-quantity" id="ar15" name="ar15Qtd" placeholder="Quantidade">
+                <label>
+                    <input type="checkbox" name="item" value="SG" class="material-checkbox">
+                    SG
+                </label>
+                <input type="number" class="material-quantity" id="sg" name="sgQtd" placeholder="Quantidade">
+                <label>
+                    <input type="checkbox" name="item" value="M16" class="material-checkbox">
+                    M16
+                </label>
+                <input type="number" class="material-quantity" id="m16" name="m16Qtd" placeholder="Quantidade">
+                <label>
+                    <input type="checkbox" name="item" value="Placa clonada" class="material-checkbox">
+                    Placa Clonada
+                </label>
+                <input type="number" class="material-quantity" id="placa_clonada" name="placa_clonadaQtd" placeholder="Quantidade">
+                <label>
+                    <input type="checkbox" name="item" value="Mp5" class="material-checkbox">
+                    MP5
+                </label>
+                <input type="number" class="material-quantity" id="mp5" name="mp5Qtd" placeholder="Quantidade">
+                <label>
+                    <input type="checkbox" name="item" value="Supressor" class="material-checkbox">
+                    Supressor
+                </label>
+                <input type="number" class="material-quantity" id="supressor" name="supressorQtd" placeholder="Quantidade">
+                <label>
+                    <input type="checkbox" name="item" value="Molotov" class="material-checkbox">
+                    Molotov
+                </label>
+                <input type="number" class="material-quantity" id="molotov" name="molotovQtd" placeholder="Quantidade">
+                <!-- Outras caixas de seleção para materiais -->
+            </div>
+
+            <label for="relatorio">Breve relatório da ocorrência:</label>
+            <input type="text" id="relatorio" name="relatorio" required>
+
+            <label for="imageUpload">Enviar Imagem do inventário do preso</label>
+            <input type="file" id="imageUpload" name="imageUpload" accept="image/*" multiple>
+
+            <button type="submit">Enviar</button>
+        </form>
+
+        <p class="success-message" id="successMessage" style="display:none;">Relatório enviado com sucesso!</p>
+        <p class="error-message" id="errorMessage" style="display:none;">Falha ao enviar o relatório. Tente novamente.</p>
+    </div>
+    <div id="loading" style="display: none; text-align: center;">
+        <p>Carregando...</p>
+        <img src="loading.gif" alt="Loading..." style="width: 50px; height: 50px;" />
+    </div>
+
+    <script>
+        const form = document.getElementById('reportForm');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+        const loginForm = document.getElementById('loginForm');
+        const loginButton = document.getElementById('loginButton');
+        const loginErrorMessage = document.getElementById('loginErrorMessage');
+        const localizacaoSelect = document.getElementById('localizacao');
+        const referenciaSelect = document.getElementById('referencia');
+        const referenciaLabel = document.getElementById('referenciaLabel');
+
+        const users = {
+            'HJY2': { nome: '<@1042464970392223755>' }, // Sid
+            'POK3': { nome: '<@292006349020069889>' }, // Jason
+            'ADJ1': { nome: '<@1042464970392223755>' }, // Leal
+            'ZXW7': { nome: '<@997151738337439914>' }, // Biel Vasquez
+            'FSN3': { nome: '<@1088265185174765608>' }, // Hugo Skunk
+            'ASD1': { nome: '<@530815021169508352>' },  // Marcos Junior
+            'RTY7': { nome: '<@725810834424594442>' }, // Arryn
+            'LOK1': { nome: '<@807729422919532554>' }, // Gustavo Loko
+            'XY2V': { nome: '<@469664301532053504>' },  // Edson Sant
+            'IOP2': { nome: '<@292006349020069889>' }, // Erick Jhonson
+            'NJW2': { nome: '<@1280910661269983313>' }, // Llyson Sousa
+            'CQW1': { nome: '<@895139818877644820>' }, // Medina Amaral
+            'XCV2': { nome: '<@1142162700072398869 >' } // Rodrigo Guedes
+            // ...restante dos usuários...
+        };
+
+        // Mapeamento de localizações para referências
+        const referencias = {
+            'Los Santos': ['Aos arredores da Lojinha próximo ao guetto preto', 
+            'Aos arredores da garagem da praia',
+            'Aos arredores da Garagem próximo a prefeitura',
+            'Aos arredores da Garagem da prefeitura',
+            'Aos arredores da Garagem próximo ao HP de LS',
+            'Aos arredores do Hotel laranja',
+            'Aos arredores do Posto do CJ',
+            'Aos arredores da Lojinha do posto do cj',
+            'Aos arredores da Cracolândia',
+            'Aos arredores da Ammunation perto da praia',
+            'Aos arredores do Lixeiro'
+            ],
+            
+            'San Fierro': ['Aos arredores da Lojinha próximo a cracolandia',
+            'Aos arredores da Cracolandia',
+            'Aos arredores da Garagem perto da cracolandia',
+            'Aos arredores do Posto proximo a cracolandia',
+            'Aos arredores da Garagem proximo a joalheria',
+            'Aos arredores da Garagem proximo ao cinema',
+            'Aos arredores da Garagem da antiga transportadora',
+            'Aos arredores da Garagem da quadra de tênis'
+            ],
+            
+            'Las Venturas': ['Aos arredores da Prefeitura',
+            'Aos arredores da Lojinha ao lado da Delegacia',
+            'Aos arredores da Cracolândia',
+            'Aos arredores da Garagem do banco',
+            'Aos arredores da Lojinha próximo ao banco',
+            'Aos arredores da Lojinha próximo ao pedágio',
+            'Aos arredores da Garagem da Igreja',
+            'Aos arredores do Posto próximo a DP'
+            ],
+
+            'Red County': ['Aos arredores da Lojinha próximo ao emprego de Carniceiro',
+            'Aos arredores da Garagem próximo ao emprego de Carniceiro',
+            'Aos arredores da Garágem próxima a cidade do emprego de Carniceiro',
+            'Aos arredores da Ammunation palomino',
+            'Aos arredores da Garagem palomino'
+            ],
+
+            'Flinty County': ['Aos arredores da Cracolandia fazenda',
+            'Aos arredores da Garagem do greenfarm',
+            'Aos arredores da Garagem do HP ilegal'
+            ],
+            'Whetstone County': ['Aos arredores da Ammunation', 
+            'Aos arredores da Garagem'
+        ]
+        };
+
+
+        let userName = '';
+        loginButton.addEventListener('click', function() {
+            const login = document.getElementById('login').value;
+
+            if (users[login]) {
+                userName = users[login].nome;
+                loginForm.style.display = 'none';
+                form.style.display = 'block';
+                loginErrorMessage.style.display = 'none';
+            } else {
+                loginErrorMessage.style.display = 'block';
+            }
+        });
+
+        // Exibe o menu de referências quando uma localização é selecionada
+        localizacaoSelect.addEventListener('change', function() {
+            const localizacao = localizacaoSelect.value;
+            if (localizacao && referencias[localizacao]) {
+                // Limpa as opções antigas de referências
+                referenciaSelect.innerHTML = '';
+                referencias[localizacao].forEach(ref => {
+                    const option = document.createElement('option');
+                    option.value = ref;
+                    option.textContent = ref;
+                    referenciaSelect.appendChild(option);
+                });
+
+                // Exibe o menu de referências
+                referenciaLabel.style.display = 'block';
+                referenciaSelect.style.display = 'block';
+            } else {
+                // Oculta o menu de referências se nenhuma localização for selecionada
+                referenciaLabel.style.display = 'none';
+                referenciaSelect.style.display = 'none';
+            }
+        });
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+                // Exibe a animação de carregamento
+            const loading = document.getElementById('loading');
+            loading.style.display = 'block'; // Mostra o carregando
+            successMessage.style.display = 'none'; // Esconde a mensagem de sucesso
+
+            const qra = document.getElementById('qra').value;
+            const rg = document.getElementById('rg').value;
+            const detidoName = document.getElementById('detidoName').value;
+            const localizacao = document.getElementById('localizacao').value;
+            const referencia = document.getElementById('referencia').value;
+            const relatorio = document.getElementById('relatorio').value;
+            const materiais = [];
+            const imageFiles = document.getElementById('imageUpload').files;
+
+                        // Coletar materiais e quantidades selecionadas
+                        document.querySelectorAll('.material-checkbox').forEach((checkbox) => {
+                if (checkbox.checked) {
+                    const relatedInput = document.getElementById(checkbox.value.replace(/\s+/g, '_').toLowerCase());
+                    const quantidade = relatedInput.value ? relatedInput.value : 0;
+                    materiais.push(`${checkbox.value}: ${quantidade}`);
+                }
+            });
+
+            const webhookURL = "https://discord.com/api/webhooks/1291473547356799087/30L1V-9g-twFsBk758mnLYpI7DIC9i8aAM-ttAZrUkerdVpUNnaFggc_2f6A4px8W58I";
+
+            const formData = new FormData();
+            formData.append('content', `# 📂 ${userName} Realizou um novo relatório de apreensão\n
+👮 **QRA:** ${qra}\n
+📝 **RG do detido:** ${rg}
+📝 **Nome do detido:** ${detidoName}
+🌐 **Localização:** ${localizacao}
+📝 **Referência:** ${referencia}\n
+📝 **Relatório:** ${relatorio}
+
+> 🧰 **Materiais:** \n > 🧰 ${materiais.join('\n> 🧰 ')}`);
+
+            for (let i = 0; i < imageFiles.length; i++) {
+                formData.append(`file${i}`, imageFiles[i]);
+            }
+
+            try {
+        const response = await fetch(webhookURL, {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+            loading.style.display = 'none'; // Esconde a animação de carregamento
+            successMessage.style.display = 'block'; // Mostra a mensagem de sucesso
+            form.reset();
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 2000);
+        } else {
+            errorMessage.style.display = 'block';
+        }
+    } catch (error) {
+        errorMessage.style.display = 'block';
+    }
+
+            const webhookURL2 = "https://discord.com/api/webhooks/1292185080071983165/3lXaKfSXBc-n_I9teAANBXGiNnOIUhGHIArwiA8_sKo5Lr1PAE1VsUUPpuPgaAxMCj_m";
+        
+        const formData2 = new FormData();
+        formData2.append('content', `# 📰 ${referencia} em ${localizacao} está acontecendo crimes!\n
+    📝 **Relatório:** ${relatorio}\n
+    📝 **Referência:** ${referencia}
+    > 🧰 **Materiais encontrados:** \n > 🧰 ${materiais.join('\n> 🧰 ')}`);
+    
+        try {
+            const response = await fetch(webhookURL2, {
+                        method: 'POST',
+                        body: formData2
+                    })
+           
+            if (response.ok) {
+                successMessage.style.display = 'block';
+                form.reset();
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 1000);
+            } else {
+                errorMessage.style.display = 'block';
+            }
+        } catch (error) {
+            errorMessage.style.display = 'block';
+        }
+        });
+
+        
+
+                // Exibir campos de quantidade de materiais
+                const materialCheckboxes = document.querySelectorAll('.material-checkbox');
+        materialCheckboxes.forEach((checkbox) => {
+            checkbox.addEventListener('change', function() {
+                const relatedInput = document.getElementById(checkbox.value.replace(/\s+/g, '_').toLowerCase());
+                if (checkbox.checked) {
+                    relatedInput.style.display = 'block';
+                } else {
+                    relatedInput.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

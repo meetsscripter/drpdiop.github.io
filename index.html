@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesquisa de Produtos</title>
+    <link rel="shortcut icon" href="../imagem/Logo.png" type="image/x-icon">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            background-color: #1e1e1e;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+        }
+
+        video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            filter: brightness(50%) blur(3px);
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .image-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-right: 40px; /* Margem para afastar da borda esquerda */
+        }
+
+        .image-container img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            text-align: center;
+            font-size: 16px;
+            max-width: 400px;
+            color: #f4f4f4;
+        }
+
+        .search-container {
+            flex: 1;
+            margin-left: 20px;
+            max-width: 400px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+        }
+
+        .menu-categories {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .menu-categories button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 10px;
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-categories button:hover {
+            background-color: #555;
+        }
+
+        #inputBusca {
+            padding: 12px;
+            width: 92%;
+            border-radius: 10px;
+            border: none;
+            font-size: 16px;
+            margin-bottom: 10px;
+            background-color: #333;
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        #listaProdutos {
+            list-style-type: none;
+            padding: 0;
+            display: none;
+            max-height: 250px;
+            overflow-y: auto;
+            width: 100%;
+            scrollbar-width: thin;
+            scrollbar-color: #555 #1e1e1e;
+        }
+
+        #listaProdutos::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        #listaProdutos::-webkit-scrollbar-track {
+            background: #1e1e1e;
+            border-radius: 10px;
+        }
+
+        #listaProdutos li {
+            margin: 10px 0;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        #listaProdutos li:hover {
+            transform: scale(1.05);
+        }
+
+        #listaProdutos a {
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+
+        #listaProdutos img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        #listaProdutos .item-name {
+            font-weight: bold;
+            font-size: 18px;
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .image-container {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+
+            .search-container {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <video autoplay muted loop>
+        <source src="../video/video.mp4" type="video/mp4">
+    </video>
+
+    <div class="container">
+        <!-- Container da imagem -->
+        <div class="image-container">
+            <img src="../imagem/Logo.png" alt="Grande Imagem">
+            <div class="description">
+                <p>Descrição da imagem ou produto destacado.</p>
+            </div>
+        </div>
+
+        <!-- Container da pesquisa -->
+        <div class="search-container">
+            <div class="menu-categories">
+                <button onclick="mostrarDúvidas()">Área de Dúvidas</button>
+                <button onclick="mostrarFormulario()">Área de Formulários</button>
+            </div>
+
+            <input id="inputBusca" onkeyup="filtrar()" type="text" placeholder="O que você procura?">
+
+            <ul id="listaProdutos">
+                <!-- Produtos listados -->
+                <li class="dúvidas">
+                    <a href="#">
+                        <img src="https://i.imgur.com/QgIclE2.png" alt="Produto">
+                        <span class="item-name">Produto 1</span>
+                    </a>
+                </li>
+                <li class="formulario">
+                    <a href="#">
+                        <img src="https://i.imgur.com/QgIclE2.png" alt="Produto">
+                        <span class="item-name">Produto 2</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function mostrarDúvidas() {
+            const ilícitos = document.querySelectorAll('.ilícitos');
+            const dúvidas = document.querySelectorAll('.dúvidas');
+            const formulario = document.querySelectorAll('.formulario');
+            ilícitos.forEach(item => item.style.display = 'none');
+            formulario.forEach(item => item.style.display = 'none');
+            dúvidas.forEach(item => item.style.display = 'block');
+            document.getElementById('listaProdutos').style.display = 'block';
+        }
+
+        function mostrarFormulario() {
+            const ilícitos = document.querySelectorAll('.ilícitos');
+            const dúvidas = document.querySelectorAll('.dúvidas');
+            const formulario = document.querySelectorAll('.formulario');
+            ilícitos.forEach(item => item.style.display = 'none');
+            dúvidas.forEach(item => item.style.display = 'none');
+            formulario.forEach(item => item.style.display = 'block');
+            document.getElementById('listaProdutos').style.display = 'block';
+        }
+
+        function filtrar() {
+            const input = document.getElementById('inputBusca');
+            const filter = input.value.toLowerCase();
+            const ul = document.getElementById('listaProdutos');
+            const li = ul.getElementsByTagName('li');
+
+            let hasVisibleItems = false;
+
+            if (filter === '') {
+                ul.style.display = 'none';
+            } else {
+                for (let i = 0; i < li.length; i++) {
+                    const a = li[i].getElementsByTagName('a')[0];
+                    const txtValue = a.textContent || a.innerText;
+                    if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                        li[i].style.display = "";
+                        hasVisibleItems = true;
+                    } else {
+                        li[i].style.display = "none";
+                    }
+                }
+                ul.style.display = hasVisibleItems ? "block" : "none";
+            }
+        }
+    </script>
+
+</body>
+
+</html>
